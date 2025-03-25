@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+ <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">  
+    <h1>
+    Qr Code Generator
+  </h1>
+  <h3>Please Enter any Text Or URL</h3>
+  <div class="display">
+    <input type="text" id="qrText" placeholder="Type here" >
+  </div>
+  <div id="qrBox">
+    <image src="" alt="" id="qrImg">
+  </div>
+  <div>
+  <button onclick="qrGenerate();" >Generate</button>
+  <button onclick="downloadQR();">Download</button>
+  </div>
+       <p style="margin-top:50px;margin-bottom:-15px;">&copy; Created By - Md.IKS</p>
+  </div>
+  
+
+  <script>
+    let qrText = document.getElementById("qrText") ;
+    let qrImg = document.getElementById("qrImg");
+    let qrBox = document.getElementById("qrBox");
+    
+    function qrGenerate() { 
+      qrImg.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + qrText.value;
+    };
+    
+      async function downloadQR() {
+    const blob = await (await fetch(qrImg.src)).blob();
+    Object.assign(document.createElement("a"), { 
+        href: URL.createObjectURL(blob), 
+        download: "QR_Code.png" 
+    }).click();
+};
+  </script>
+</body>
+</html>
